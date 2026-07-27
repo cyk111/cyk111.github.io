@@ -42,28 +42,9 @@ html.theme-amber {
   --color-muted: #8A8278;
 }
 
-@layer base {
-  @font-face {
-    font-family: "Atkinson";
-    src: url("/fonts/atkinson-regular.woff") format("woff");
-    font-weight: 400;
-    font-style: normal;
-    font-display: swap;
-  }
-
-  @font-face {
-    font-family: "Atkinson";
-    src: url("/fonts/atkinson-bold.woff") format("woff");
-    font-weight: 700;
-    font-style: normal;
-    font-display: swap;
-  }
-}
-
 html {
   overflow-y: scroll;
   background-color: var(--color-bg);
-  font-family: "Atkinson", sans-serif;
 }
 
 html,
