@@ -1,47 +1,62 @@
 ---
 import { getCollection } from "astro:content";
 import PageLayout from "@layouts/PageLayout.astro";
-import TopLayout from "@layouts/TopLayout.astro";
-import BottomLayout from "@layouts/BottomLayout.astro";
-import SearchCollection from "@components/SearchCollection";
 import { PROJECTS } from "@consts";
-import type { CollectionEntry } from "astro:content";
 
 const projects = (await getCollection("projects"))
   .filter((project) => !project.data.draft)
   .sort((a, b) => b.data.date.getTime() - a.data.date.getTime());
-
-const tags = [
-  ...new Set(projects.flatMap((project) => project.data.tags)),
-].sort((a, b) => a.localeCompare(b));
-
-const estimated_initial_size =
-  28 + projects.length * 158 + (projects.length - 1) * 12;
 ---
 
 <PageLayout title={PROJECTS.TITLE} description={PROJECTS.DESCRIPTION}>
-  <TopLayout>
-    <div class="animate">
-      <h1 class="text-3xl font-semibold text-black dark:text-white mt-2">
-        {PROJECTS.TITLE}
-      </h1>
-      <div class="mt-1">
-        {PROJECTS.DESCRIPTION}
-      </div>
-    </div>
-  </TopLayout>
-  <BottomLayout>
-    <div
-      id="search-collection-wrapper"
-      class="animate"
-      style={{ minHeight: `${estimated_initial_size}px` }}
-    >
-      <SearchCollection
-        client:load
-        entry_name={"projects"}
-        tags={tags}
-        data={projects}
-      />
-    </div>
-  </BottomLayout>
+  <div class="mx-auto max-w-3xl px-5 pt-36 pb-24">
+    <h1 class="font-serif text-4xl font-bold mb-2 animate" style="color: var(--color-text)">
+      {PROJECTS.TITLE}
+    </h1>
+    <p class="mb-12 animate" style="color: var(--color-muted)">
+      {PROJECTS.DESCRIPTION}
+    </p>
+
+    <ul class="space-y-10 animate">
+      {projects.map((project) => (
+        <li>
+          <a href={`/projects/${project.slug}`} class="group block">
+            <h2
+              class="font-serif text-2xl font-semibold leading-snug group-hover:underline underline-offset-2 decoration-1"
+              style={{
+                color: "var(--color-text)",
+                "text-decoration-color": "var(--color-accent)",
+              }}
+            >
+              {project.data.title}
+            </h2>
+            <p class="mt-2 leading-relaxed" style="color: var(--color-muted)">
+              {project.data.summary}
+            </p>
+            {project.data.tags && (
+              <div class="flex flex-wrap gap-1.5 mt-3">
+                {project.data.tags.map((tag: string) => (
+                  <span
+                    class="text-xs px-2 py-0.5 rounded-full"
+                    style={{
+                      "background-color": "var(--color-accent-soft)",
+                      color: "var(--color-accent)",
+                    }}
+                  >
+                    {tag}
+                  </span>
+                ))}
+              </div>
+            )}
+          </a>
+        </li>
+      ))}
+    </ul>
+
+    {projects.length === 0 && (
+      <p class="text-center py-20" style="color: var(--color-muted)">
+        No projects yet.
+      </p>
+    )}
+  </div>
 </PageLayout>
