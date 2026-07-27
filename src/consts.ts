@@ -34,11 +34,11 @@ export const SEARCH: Page = {
 // Links
 export const LINKS: Links = [
   { 
-    TEXT: "Home", 
+    TEXT: "主页", 
     HREF: "/", 
   },
   { 
-    TEXT: "Work", 
+    TEXT: " 学习", 
     HREF: "/work", 
   },
   { 
@@ -46,7 +46,7 @@ export const LINKS: Links = [
     HREF: "/blog", 
   },
   { 
-    TEXT: "Projects", 
+    TEXT: "项目", 
     HREF: "/projects", 
   },
 ]
@@ -56,7 +56,7 @@ export const SOCIALS: Socials = [
   { 
     NAME: "Email",
     ICON: "email", 
-    TEXT: "markhorn.dev@gmail.com",
+    TEXT: " chenyongke11@gmail.com",
     HREF: "mailto:markhorn.dev@gmail.com",
   },
   {
