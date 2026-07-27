@@ -19,7 +19,13 @@ function getAutoTheme(): Theme {
 
 export default function ThemeSwitcher() {
   const [mode, setMode] = createSignal<Mode>(
-    (localStorage.getItem(THEME_KEY) as Mode) || "auto"
+    (() => {
+      try {
+        return (localStorage.getItem(THEME_KEY) as Mode) || "auto";
+      } catch {
+        return "auto";
+      }
+    })()
   );
   const [open, setOpen] = createSignal(false);
 
