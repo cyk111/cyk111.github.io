@@ -80,6 +80,41 @@ header.scrolled {
 
 article {
   @apply prose max-w-full pb-12;
+  color: var(--color-text);
+}
+
+article h1, article h2, article h3, article h4 {
+  font-family: "Playfair Display", serif;
+  color: var(--color-text);
+}
+
+article a {
+  color: var(--color-accent);
+  text-decoration: underline;
+  text-decoration-color: var(--color-accent-soft);
+}
+
+article code {
+  font-family: "JetBrains Mono", monospace;
+  background-color: var(--color-code-bg);
+  border-radius: 4px;
+  padding: 0.15em 0.3em;
+  font-size: 0.9em;
+}
+
+article pre {
+  background-color: var(--color-code-bg);
+  border: 1px solid var(--color-border);
+}
+
+article pre code {
+  background-color: transparent;
+  padding: 0;
+}
+
+article blockquote {
+  border-left-color: var(--color-accent);
+  color: var(--color-muted);
 }
 
 .page-heading {
