@@ -6,6 +6,42 @@
   --copy-btn-margin: 10px;
 }
 
+/* --- Warm Theme System --- */
+
+/* Default: Sunrise (日系朝霞) */
+:root,
+html.theme-sunrise {
+  --color-bg: #F9F8F5;
+  --color-text: #3B3734;
+  --color-accent: #D46A5C;
+  --color-accent-soft: #E8D4D1;
+  --color-code-bg: #F1EEEA;
+  --color-border: #E5E0DB;
+  --color-muted: #8A8580;
+}
+
+/* Coffee (咖啡暖调) */
+html.theme-coffee {
+  --color-bg: #FAF7F2;
+  --color-text: #3D3830;
+  --color-accent: #C76B3E;
+  --color-accent-soft: #F0E0D2;
+  --color-code-bg: #F3EFE9;
+  --color-border: #E8E0D6;
+  --color-muted: #8A8278;
+}
+
+/* Amber (琥珀墨色) */
+html.theme-amber {
+  --color-bg: #FCFAF7;
+  --color-text: #2C2826;
+  --color-accent: #B4843E;
+  --color-accent-soft: #EBE0CD;
+  --color-code-bg: #F5F1EB;
+  --color-border: #E5DED4;
+  --color-muted: #8A8278;
+}
+
 @layer base {
   @font-face {
     font-family: "Atkinson";
@@ -26,22 +62,15 @@
 
 html {
   overflow-y: scroll;
-  color-scheme: light;
-  background-color: white;
+  background-color: var(--color-bg);
   font-family: "Atkinson", sans-serif;
-
-}
-
-html.dark {
-  color-scheme: dark;
-  background-color: black;
 }
 
 html,
 body {
   @apply h-full w-full antialiased;
-  @apply bg-white dark:bg-black;
-  @apply text-black/75 dark:text-white/75;
+  background-color: var(--color-bg);
+  color: var(--color-text);
 }
 
 body {
@@ -49,12 +78,13 @@ body {
 }
 
 main {
-  @apply flex flex-col flex-1 bg-white dark:bg-black;
+  @apply flex flex-col flex-1;
+  background-color: var(--color-bg);
 }
 
 header {
-  @apply border-b;
-  @apply transition-all duration-300 ease-in-out;
+  @apply border-b transition-all duration-300 ease-in-out;
+  border-color: var(--color-border);
 }
 
 header:not(.scrolled) {
@@ -62,32 +92,22 @@ header:not(.scrolled) {
 }
 
 header.scrolled {
-  @apply bg-white/75 dark:bg-black/50;
-  @apply border-black/10 dark:border-white/25;
+  background-color: color-mix(in srgb, var(--color-bg) 75%, transparent);
+  border-color: var(--color-border);
   @apply backdrop-blur-sm saturate-200;
 }
 
 article {
-  @apply prose dark:prose-invert max-w-full pb-12;
+  @apply prose max-w-full pb-12;
 }
 
 .page-heading {
-  @apply font-semibold text-black dark:text-white;
+  @apply font-semibold;
+  color: var(--color-text);
 }
 
 .blend {
   @apply transition-all duration-300 ease-in-out;
-}
-
-/** Light theme particles on home page */
-@keyframes animateParticle {
-  from {
-    transform: translateY(0px);
-  }
-
-  to {
-    transform: translateY(-2000px);
-  }
 }
 
 /** styles for public /animation.js */
@@ -109,54 +129,6 @@ article img {
   margin: 0 auto;
 }
 
-/**
- * TWINKLE STARS
- */
-
-#twinkle-star.template {
-  @apply absolute -left-full;
-  /* hide offscreen */
-}
-
-#twinkle-star.twinkle {
-  @apply animate-twinkle;
-  /* defined in tailwind.config */
-}
-
-
-/**
- * Meteors
- */
-
-#meteors .shower {
-  @apply absolute inset-0 top-0;
-  ;
-  @apply left-1/2 -translate-x-1/2;
-  @apply w-screen aspect-square;
-}
-
-#meteors .meteor {
-  @apply animate-meteor;
-  /* defined in tailwind.config */
-  @apply absolute top-1/2 left-1/2 w-px h-[75vh];
-  @apply bg-gradient-to-b from-white to-transparent;
-}
-
-#meteors .shower.ur {
-  @apply rotate-45;
-}
-
-#meteors .shower.dr {
-  @apply rotate-135;
-}
-
-#meteors .shower.dl {
-  @apply rotate-225;
-}
-
-#meteors .shower.ul {
-  @apply rotate-315;
-}
 
 .copy-cnt {
   @apply absolute w-full;
@@ -173,14 +145,3 @@ article img {
   @apply w-full aspect-square text-white opacity-70 hover:opacity-90;
 }
 
-/* Card transition */
-/* .fade-move-enter-active,
-.fade-move-exit-active {
-  transition: all 300ms ease;
-}
-
-.fade-move-enter-from,
-.fade-move-exit-to {
-  opacity: 0;
-  transform: translateY(10px);
-} */
